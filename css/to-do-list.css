@@ -118,6 +118,30 @@ a {
     }
 }
 
+@keyframes right-left-small {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(30px);
+
+    }
+
+    50% {
+        transform: translateX(0);
+        ;
+
+    }
+
+    75% {
+        transform: translateX(-30px);
+
+    }
+}
+
 
 .landing .header .logo .icon {
     display: flex;
@@ -140,13 +164,17 @@ a {
 }
 
 @media (max-width: 992px) {
+    .landing .header .logo {
+        animation: right-left-small 7s linear infinite;
+    }
+
     .landing .header .logo h1 {
         font-size: 18px;
         text-align: center;
     }
 
     .landing .header .logo .icon {
-        font-size: 20px;
+        font-size: 15px;
     }
 }
 
