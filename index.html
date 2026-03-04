@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do-List</title>
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/all.min.css">
+    <link rel="stylesheet" href="css/to-do-list.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <div class="landing">
+        <div class="header">
+            <div class="container">
+                <div class="logo">
+                    <div class="icon"><i class="fa-solid fa-check"></i></div>
+                    <div class="title">
+                        <h1>MY TO-DO-LIST</h1>
+                    </div>
+                </div>
+                <div class="add-task-icon">
+                    <a href="#">
+                        <span class="icon"> <i class="fa-solid fa-plus"></i> </span>
+                        <span class="text">Add Task</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="adding" id="adding">
+            <div class="container">
+                <div class="title">
+                    <p>What's on Your Agenda Today?</p>
+                </div>
+                <form action="">
+                    <input type="text" placeholder="Enter A New Task..">
+                    <input type="submit" value="Add">
+                </form>
+            </div>
+        </div>
+        <div class="pending-tasks" id="pinding-tasks">
+            <div class="container">
+                <h1>Pending Tasks</h1>
+                <div class="boxes">
+                    <div class="box">
+                        <div class="title">
+                            <div class="empty-icon">
+                            </div>
+                            <h3>Finish HTML & CSS Courses</h3>
+                        </div>
+                        <a href="#">
+                            <i class="fa-solid fa-pen"></i>
+                        </a>
+                    </div>
+                    <div class="box">
+                        <div class="title">
+                            <div class="empty-icon"></div>
+                            <h3>Finish JS Courses</h3>
+                        </div>
+                        <a href="#">
+                            <i class="fa-solid fa-pen"></i>
+                        </a>
+                    </div>
+                    <div class="box">
+                        <div class="title">
+                            <div class="empty-icon"></div>
+                            <h3>Finish Bootstrap & React Courses</h3>
+                        </div>
+                        <a href="#">
+                            <i class="fa-solid fa-pen"></i>
+                        </a>
+
+                    </div>
+                    <div class="box">
+                        <div class="title">
+                            <div class="empty-icon"></div>
+                            <h3>Finish Git & Githup Courses</h3>
+                        </div>
+                        <a href="#">
+                            <i class="fa-solid fa-pen"></i>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="completed-tasks" id="completed-tasks">
+            <div class="container">
+                <h1>Completed Tasks</h1>
+                <div class="boxes">
+                    <div class="box">
+                        <div class="title">
+                            <div class="icon"><i class="fa-solid fa-check"></i></div>
+
+                            <h3>Call Back Bola</h3>
+                        </div>
+                    </div>
+                    <div class="box">
+                        <div class="title">
+                            <div class="icon"><i class="fa-solid fa-check"></i></div>
+                            <h3>Going To Grandma</h3>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    </div>
+</body>
+
+</html>
