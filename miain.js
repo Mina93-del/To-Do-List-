@@ -205,10 +205,12 @@ function getelementfromlocal() {
 
     if (data) {
         mytaskarray = JSON.parse(data);
-        addelementtopage(mytaskarray);
-        addecomptopage(mytaskarray);
-
+    } else {
+        mytaskarray = [];
     }
+
+    addelementtopage(mytaskarray);
+    addecomptopage(mytaskarray);
 }
 
 function completeelemin(compdiv) {
