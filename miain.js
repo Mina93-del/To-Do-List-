@@ -205,9 +205,7 @@ function getelementfromlocal() {
 
     if (data) {
         mytaskarray = JSON.parse(data);
-    } else {
-        mytaskarray = [];
-    }
+    } 
 
     addelementtopage(mytaskarray);
     addecomptopage(mytaskarray);
