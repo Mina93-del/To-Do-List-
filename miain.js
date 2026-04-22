@@ -26,6 +26,7 @@ if (localStorage.getItem("tasks")) {
 
 
 getelementfromlocal();
+addelementtopage(mytaskarray)
 addecomptopage(mytaskarray)
 
 addtassk.onclick = function () {
