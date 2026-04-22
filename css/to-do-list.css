@@ -328,6 +328,129 @@ a {
     }
 }
 
+.all-tasks {
+    padding-top: var(--section-padding);
+    position: relative;
+}
+
+.all-tasks .container {
+    padding: 20px;
+    border-top: 1px solid #ccc;
+    position: relative;
+}
+
+.all-tasks .box {
+    transition: 0.3s;
+}
+
+.all-tasks .box:hover {
+    transform: translateY(-4px);
+}
+
+.all-tasks .container h1 {
+    position: absolute;
+    top: -37px;
+    left: 0;
+    background-color: var(--section-background-alr);
+    padding: 0 20px;
+    color: #2f4968df;
+    font-weight: bold;
+    font-size: 25px;
+}
+
+.all-tasks .container .boxes {
+    position: relative;
+    margin: 15px 0;
+
+}
+
+.all-tasks .container .boxes .box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 25px 20px;
+    margin-bottom: 15px;
+    background-color: white;
+    border: 1px solid #ccc;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    border-radius: 5px;
+}
+
+.all-tasks .container .boxes .box .title {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    flex: 1;
+}
+
+
+.all-tasks .container .boxes .box .title .empty-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2px 1px;
+    border-radius: 7px;
+    border: 1.7px solid #2f4968df;
+    transition: var(--main-transition);
+
+}
+
+.all-tasks .container .boxes .box .title .empty-icon i {
+    font-size: 20px;
+    color: white;
+    font-weight: bold;
+}
+
+.all-tasks .container .boxes .box .title .empty-icon.activa {
+    background-color: #68b25d;
+    border: none;
+    padding: 5px 3px;
+
+}
+
+.all-tasks .container .boxes .box .title h3.done {
+    color: #444;
+    flex: 1;
+    word-break: break-word;
+    text-decoration: line-through;
+    color: #777;
+
+}
+
+.all-tasks .container .boxes .box .title h3 {
+    color: #444;
+    flex: 1;
+    word-break: break-word;
+
+}
+
+.all-tasks .container .boxes .box a {
+    flex-shrink: 0;
+    margin-right: 10px;
+}
+
+.all-tasks .container .boxes .box a i {
+    color: #777;
+    font-size: 20px;
+    transition: var(--main-transition);
+
+}
+
+.all-tasks .container .boxes .box a i:hover {
+    color: #777777a4;
+}
+
+
+@media (max-width:767px) {
+    .all-tasks .container .boxes .box .title h3 {
+        font-size: 17px;
+    }
+
+    .all-tasks .container .boxes .box a {
+        font-size: 15px;
+    }
+}
+
 .pending-tasks {
     padding-top: var(--section-padding);
     position: relative;
@@ -407,9 +530,6 @@ a {
     padding: 5px 3px;
 
 }
-
-
-
 
 .pending-tasks .container .boxes .box .title h3 {
     color: #444;

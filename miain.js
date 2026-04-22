@@ -9,7 +9,10 @@ const box = pendtask.querySelector(".boxes");
 
 const comdtask = document.querySelector(".completed-tasks");
 const comp = comdtask.querySelector(".boxes");
-console.log(comdtask);
+
+const alltask = document.querySelector(".all-tasks");
+const all = alltask.querySelector(".boxes");
+
 const mytask = document.getElementById("my-task");
 const addtassk = document.getElementById("submit");
 
@@ -49,11 +52,30 @@ function addtaskarray(tasktext) {
 
 
 function addelementtopage(mytaskarray) {
+    all.innerHTML = "";
     box.innerHTML = "";
     {
+if(mytaskarray.length != 0){
         mytaskarray.forEach(element => {
-            if (element.completed == false) {
+           
+            let completedClass = element.completed ? "activa" : "";
+            all.innerHTML += `
+                   <div class="box" data-index="${element.id}">
+                    <div class="title">
+                            <div  class="empty-icon ${completedClass}" >
+                            <i class="fa-solid fa-check"></i>
+                            </div>
+<h3 class="${element.completed ? "done" : ""}">${element.title}</h3>                        </div>
+                        <div class="icons">
+                            <a class="deleteelement" href="#"><i class="fa-solid fa-trash"></i></a>
+                            <a class="updateelement" href="#">
+                                <i class="fa-solid fa-pen"></i>
+                            </a>
+                        </div> 
+                     </div>
+`
 
+            if (element.completed == false) {
                 let completedClass = element.completed ? "activa" : "";
 
                 box.innerHTML += `
@@ -74,12 +96,33 @@ function addelementtopage(mytaskarray) {
 `
 
             }
+       
         });
+    }
+     else {
+          all.innerHTML += `
+                   <div class="box">
+                    <div class="title" style="text-align: center; font-size: 20px;">
+                 <h3>No tasks were added yet.</h3>                 
+                        </div>
+                     </div>
+` 
+          box.innerHTML += `
+                   <div class="box">
+                    <div class="title" style="text-align: center; font-size: 20px;">
+                 <h3>No tasks were added yet.</h3>                 
+                        </div>
+                     </div>
+` 
+
+        }
     }
 }
 function addecomptopage(mytaskarray) {
     comp.innerHTML = "";
     {
+             if(mytaskarray.length != 0){
+
         mytaskarray.forEach(element => {
             let completedClass = element.completed;
             if (completedClass == true) {
@@ -98,8 +141,18 @@ function addecomptopage(mytaskarray) {
                     </div>
 `
 
-            }
+     }
         });
+        }
+     else{
+          comp.innerHTML += `
+                   <div class="box">
+                    <div class="title" style="text-align: center; font-size: 20px;">
+                 <h3 style = "text-decoration: none;  color: #444;">No tasks were added yet.</h3>                 
+                        </div>
+                     </div>
+` 
+            } 
     }
 }
 
@@ -125,11 +178,10 @@ document.addEventListener("click", (e) => {
     if (e.target.closest(".empty-icon")) {
         const boxdone = e.target.closest(".empty-icon");
         boxdone.classList.toggle("activa")
-        //     updbox = divbox.querySelector("h3")
-        //    console.log();
         completeelemin(e.target.closest(".box"));
-
-
+    }
+    else if (e.target.closest(".icon")) {
+        completeelemin(e.target.closest(".box"));
     }
 })
 
@@ -150,11 +202,11 @@ function addelementtolocal(mytaskarray) {
 
 function getelementfromlocal() {
     let data = window.localStorage.getItem("tasks");
+
     if (data) {
         mytaskarray = JSON.parse(data);
         addelementtopage(mytaskarray);
         addecomptopage(mytaskarray);
-
 
     }
 }
