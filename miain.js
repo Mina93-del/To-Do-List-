@@ -47,7 +47,7 @@ function addtaskarray(tasktext) {
     mytaskarray.push(task);
     addelementtopage(mytaskarray);
     addelementtolocal(mytaskarray);
-
+    all.lastElementChild?.scrollIntoView({ behavior: "smooth", block: "center" });
 }
 
 
@@ -55,17 +55,17 @@ function addelementtopage(mytaskarray) {
     all.innerHTML = "";
     box.innerHTML = "";
     {
-if(mytaskarray.length != 0){
-        mytaskarray.forEach(element => {
-           
-            let completedClass = element.completed ? "activa" : "";
-            all.innerHTML += `
+        if (mytaskarray.length != 0) {
+            mytaskarray.forEach(element => {
+
+                let completedClass = element.completed ? "activa" : "";
+                all.innerHTML += `
                    <div class="box" data-index="${element.id}">
                     <div class="title">
                             <div  class="empty-icon ${completedClass}" >
                             <i class="fa-solid fa-check"></i>
                             </div>
-<h3 class="${element.completed ? "done" : ""}">${element.title}</h3>                        </div>
+             <h3 class="${element.completed ? "done" : ""}">${element.title}</h3>                        </div>
                         <div class="icons">
                             <a class="deleteelement" href="#"><i class="fa-solid fa-trash"></i></a>
                             <a class="updateelement" href="#">
@@ -75,10 +75,10 @@ if(mytaskarray.length != 0){
                      </div>
 `
 
-            if (element.completed == false) {
-                let completedClass = element.completed ? "activa" : "";
+                if (element.completed == false) {
+                    let completedClass = element.completed ? "activa" : "";
 
-                box.innerHTML += `
+                    box.innerHTML += `
                    <div class="box" data-index="${element.id}">
                     <div class="title">
                             <div  class="empty-icon ${completedClass}" >
@@ -95,25 +95,25 @@ if(mytaskarray.length != 0){
                      </div>
 `
 
-            }
-       
-        });
-    }
-     else {
-          all.innerHTML += `
+                }
+
+            });
+        }
+        else {
+            all.innerHTML += `
                    <div class="box">
                     <div class="title" style="text-align: center; font-size: 20px;">
                  <h3>No tasks were added yet.</h3>                 
                         </div>
                      </div>
-` 
-          box.innerHTML += `
+`
+            box.innerHTML += `
                    <div class="box">
                     <div class="title" style="text-align: center; font-size: 20px;">
                  <h3>No tasks were added yet.</h3>                 
                         </div>
                      </div>
-` 
+`
 
         }
     }
@@ -121,16 +121,16 @@ if(mytaskarray.length != 0){
 function addecomptopage(mytaskarray) {
     comp.innerHTML = "";
     {
-             if(mytaskarray.length != 0){
+        if (mytaskarray.length != 0) {
 
-        mytaskarray.forEach(element => {
-            let completedClass = element.completed;
-            if (completedClass == true) {
-                comp.innerHTML += `
+            mytaskarray.forEach(element => {
+                let completedClass = element.completed;
+                if (completedClass == true) {
+                    comp.innerHTML += `
                    <div class="box" data-index="${element.id}">
                         <div class="title">
                             <div class="icon"><i class="fa-solid fa-check"></i></div>
-                            <h3>${element.title}</h3>
+                            <h3  class="task-title">${element.title}</h3>
                         </div>
                         <div class="icons">
                             <a class="deleteelement" href="#"><i class="fa-solid fa-trash"></i></a>
@@ -141,18 +141,18 @@ function addecomptopage(mytaskarray) {
                     </div>
 `
 
-     }
-        });
+                }
+            });
         }
-     else{
-          comp.innerHTML += `
+        else {
+            comp.innerHTML += `
                    <div class="box">
                     <div class="title" style="text-align: center; font-size: 20px;">
                  <h3 style = "text-decoration: none;  color: #444;">No tasks were added yet.</h3>                 
                         </div>
                      </div>
-` 
-            } 
+`
+        }
     }
 }
 
@@ -166,14 +166,14 @@ document.addEventListener("click", (e) => {
     }
 })
 
-// document.addEventListener("click" ,(e)  =>{
-//     if (e.target.closest(".updateelement")) {
-//         const divbox = e.target.closest(".box");
-//         updbox = divbox.querySelector("h3")
-//        updateeleminlocal(updbox);
-//                console.log(updbox)
-//             }
-// })
+document.addEventListener("click" ,(e)  =>{
+    if (e.target.closest(".updateelement")) {
+        const updated = e.target.closest(".box");
+                     updateelement(updated , updated.querySelector(".title") );
+            }
+})
+
+
 document.addEventListener("click", (e) => {
     if (e.target.closest(".empty-icon")) {
         const boxdone = e.target.closest(".empty-icon");
@@ -202,17 +202,14 @@ function addelementtolocal(mytaskarray) {
 
 function getelementfromlocal() {
     let data = window.localStorage.getItem("tasks");
-
     if (data) {
         mytaskarray = JSON.parse(data);
-    } 
-
+    }
     addelementtopage(mytaskarray);
     addecomptopage(mytaskarray);
 }
 
 function completeelemin(compdiv) {
-
     const compileitem = Number(compdiv.dataset.index);
     mytaskarray.forEach((item) => {
         if (compileitem == item.id && item.completed == false) {
@@ -226,5 +223,34 @@ function completeelemin(compdiv) {
     addecomptopage(mytaskarray);
     window.localStorage.setItem("tasks", JSON.stringify(mytaskarray));
 
+}
 
+const modal = document.querySelector(".modal");
+const input = document.getElementById("editInput");
+
+function updateelement(updated, updtitle) {
+    const updatetitle = updtitle.querySelector("h3");
+    const compileitem = Number(updated.dataset.index);
+
+    const item = mytaskarray.find(e => e.id === compileitem);
+    if (!item) return;
+
+    input.value = item.title;
+    modal.classList.remove("hidden");
+    const saveBtn = document.getElementById("save");
+    const cancelBtn = document.getElementById("cancel");
+
+    saveBtn.onclick = () => {
+        item.title = input.value;
+
+        modal.classList.add("hidden");
+
+        addelementtopage(mytaskarray);
+        addecomptopage(mytaskarray);
+        localStorage.setItem("tasks", JSON.stringify(mytaskarray));
+    };
+
+    cancelBtn.onclick = () => {
+        modal.classList.add("hidden");
+    };
 }
